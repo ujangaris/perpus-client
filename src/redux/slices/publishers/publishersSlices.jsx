@@ -5,6 +5,7 @@ import {
   resetErrorAction,
   resetSuccessAction,
 } from "../globalSlice/globalSlice";
+import BASE_URL from "../../../utils/baseURL";
 
 //initialstate
 
@@ -31,17 +32,14 @@ export const getAllPublishersAction = createAsyncThunk(
       const { userAuth } = getState().users;
       // Mengambil access token dari informasi userAuth
       const access_token = userAuth?.userInfo?.data?.access_token;
-      // Melakukan permintaan GET ke endpoint http://localhost:5000/perpus-api/v1/users
+      // Melakukan permintaan GET ke endpoint ${BASE_URL}/users
       const config = {
         // Menambahkan header Authorization dengan nilai Bearer access_token
         headers: {
           Authorization: `Bearer ${access_token}`,
         },
       };
-      const { data } = await axios.get(
-        `http://localhost:5000/perpus-api/v1/publishers`,
-        config
-      );
+      const { data } = await axios.get(`${BASE_URL}/publishers`, config);
 
       return data;
     } catch (error) {
@@ -59,7 +57,7 @@ export const addPublisherAction = createAsyncThunk(
       const { userAuth } = getState().users;
       // Mengambil access token dari informasi userAuth
       const access_token = userAuth?.userInfo?.data?.access_token;
-      // Melakukan permintaan GET ke endpoint http://localhost:5000/perpus-api/v1/users
+      // Melakukan permintaan GET ke endpoint ${BASE_URL}/users
       const config = {
         // Menambahkan header Authorization dengan nilai Bearer access_token
         headers: {
@@ -67,7 +65,7 @@ export const addPublisherAction = createAsyncThunk(
         },
       };
       const { data } = await axios.post(
-        `http://localhost:5000/perpus-api/v1/publisher/create`,
+        `${BASE_URL}/publisher/create`,
         payload,
         config
       );
@@ -92,7 +90,7 @@ export const updatePublisherAction = createAsyncThunk(
         },
       };
       const { data } = await axios.patch(
-        `http://localhost:5000/perpus-api/v1/publisher/update/${payload.id}`,
+        `${BASE_URL}/publisher/update/${payload.id}`,
         payload.updatedData,
         config
       );
