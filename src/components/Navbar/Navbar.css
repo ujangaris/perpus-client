@@ -1,0 +1,50 @@
+.navbar .navbar-collapse .input-group {
+  margin-top: 70px;
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .navbar .navbar-collapse .input-group {
+    margin-top: 100px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .navbar .navbar-collapse .input-group {
+    margin-top: 80px;
+  }
+}
+
+.navbar .navbar-brand {
+  color: #463c74;
+  font-weight: 700;
+}
+
+.navbar .navbar-brand span {
+  color: #b4d51e;
+}
+
+.navbar i {
+  font-size: 30px;
+}
+
+.navbar .btn-search {
+  padding: 6px !important;
+  border: 1px solid #b4d51e;
+  color: #b4d51e;
+  border-radius: 0px 5px 5px 0px;
+}
+
+.navbar .btn-search:hover {
+  background-color: #b4d51e;
+  color: #fff;
+}
+
+.navbar .input-group {
+  width: 50%;
+}
+
+@media (max-width: 991.98px) {
+  .navbar .input-group {
+    width: 100%;
+  }
+}
