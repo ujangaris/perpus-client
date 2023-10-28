@@ -5,6 +5,7 @@ import {
   resetSuccessAction,
 } from "../globalSlice/globalSlice";
 
+import BASE_URL from "./../../../utils/baseURL";
 //initialstate
 
 const INITIAL_STATE = {
@@ -29,8 +30,8 @@ export const loginAction = createAsyncThunk(
     //make request
     try {
       const { data } = await axios.post(
-        // `http://localhost:9080/api/v1/users/login`,
-        `http://localhost:5000/perpus-api/v1/login`,
+        `${BASE_URL}/login`,
+        // `http://localhost:5000/perpus-api/v1/login`,
         payload
       );
       //! save the user into localstorage
@@ -48,10 +49,7 @@ export const registerAction = createAsyncThunk(
   async (payload, { rejectWithValue, getState, dispatch }) => {
     //make request
     try {
-      const { data } = await axios.post(
-        `http://localhost:5000/perpus-api/v1/register`,
-        payload
-      );
+      const { data } = await axios.post(`${BASE_URL}/register`, payload);
 
       return data;
     } catch (error) {
@@ -76,10 +74,7 @@ export const getAllUsersAction = createAsyncThunk(
           Authorization: `Bearer ${access_token}`,
         },
       };
-      const { data } = await axios.get(
-        "http://localhost:5000/perpus-api/v1/users",
-        config
-      );
+      const { data } = await axios.get(`${BASE_URL}/users`, config);
       // Mengembalikan data yang diperoleh dari permintaan sebagai hasil async thunk
       return data;
     } catch (error) {
