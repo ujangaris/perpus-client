@@ -4,6 +4,7 @@ import {
   resetErrorAction,
   resetCreateAction,
 } from "../globalSlice/globalSlice";
+import BASE_URL from "../../../utils/baseURL";
 
 //initialstate
 
@@ -30,17 +31,14 @@ export const getAllCategoriesAction = createAsyncThunk(
       const { userAuth } = getState().users;
       // Mengambil access token dari informasi userAuth
       const access_token = userAuth?.userInfo?.data?.access_token;
-      // Melakukan permintaan GET ke endpoint http://localhost:5000/perpus-api/v1/users
+      // Melakukan permintaan GET ke endpoint ${BASE_URL}/users
       const config = {
         // Menambahkan header Authorization dengan nilai Bearer access_token
         headers: {
           Authorization: `Bearer ${access_token}`,
         },
       };
-      const { data } = await axios.get(
-        `http://localhost:5000/perpus-api/v1/categories`,
-        config
-      );
+      const { data } = await axios.get(`${BASE_URL}/categories`, config);
 
       return data;
     } catch (error) {
@@ -58,7 +56,7 @@ export const addCategoryAction = createAsyncThunk(
       const { userAuth } = getState().users;
       // Mengambil access token dari informasi userAuth
       const access_token = userAuth?.userInfo?.data?.access_token;
-      // Melakukan permintaan GET ke endpoint http://localhost:5000/perpus-api/v1/users
+      // Melakukan permintaan GET ke endpoint ${BASE_URL}/users
       const config = {
         // Menambahkan header Authorization dengan nilai Bearer access_token
         headers: {
@@ -66,7 +64,7 @@ export const addCategoryAction = createAsyncThunk(
         },
       };
       const { data } = await axios.post(
-        `http://localhost:5000/perpus-api/v1/category/create`,
+        `${BASE_URL}/category/create`,
         payload,
         config
       );
@@ -91,7 +89,7 @@ export const updateCategoryAction = createAsyncThunk(
         },
       };
       const { data } = await axios.patch(
-        `http://localhost:5000/perpus-api/v1/category/update/${payload.id}`,
+        `${BASE_URL}/category/update/${payload.id}`,
         payload.updatedData,
         config
       );

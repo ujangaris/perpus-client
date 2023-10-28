@@ -4,6 +4,7 @@ import {
   resetErrorAction,
   resetCreateAction,
 } from "../globalSlice/globalSlice";
+import BASE_URL from "../../../utils/baseURL";
 
 //initialstate
 
@@ -24,17 +25,14 @@ export const getAllBooksAction = createAsyncThunk(
       const { userAuth } = getState().users;
       // Mengambil access token dari informasi userAuth
       const access_token = userAuth?.userInfo?.data?.access_token;
-      // Melakukan permintaan GET ke endpoint http://localhost:5000/perpus-api/v1/users
+      // Melakukan permintaan GET ke endpoint ${BASE_URL}/users
       const config = {
         // Menambahkan header Authorization dengan nilai Bearer access_token
         headers: {
           Authorization: `Bearer ${access_token}`,
         },
       };
-      const { data } = await axios.get(
-        `http://localhost:5000/perpus-api/v1/private_books`,
-        config
-      );
+      const { data } = await axios.get(`${BASE_URL}/private_books`, config);
 
       return data;
     } catch (error) {
@@ -63,7 +61,7 @@ export const addBooksAction = createAsyncThunk(
       const { userAuth } = getState().users;
       // Mengambil access token dari informasi userAuth
       const access_token = userAuth?.userInfo?.data?.access_token;
-      // Melakukan permintaan GET ke endpoint http://localhost:5000/perpus-api/v1/users
+      // Melakukan permintaan GET ke endpoint ${BASE_URL}/users
       const config = {
         // Menambahkan header Authorization dengan nilai Bearer access_token
         headers: {
@@ -71,7 +69,7 @@ export const addBooksAction = createAsyncThunk(
         },
       };
       const { data } = await axios.post(
-        `http://localhost:5000/perpus-api/v1/book/create`,
+        `${BASE_URL}/book/create`,
         formData,
         config
       );
@@ -106,7 +104,7 @@ export const updateBooksAction = createAsyncThunk(
         },
       };
       const { data } = await axios.patch(
-        `http://localhost:5000/perpus-api/v1/book/update/${payload.id}`,
+        `${BASE_URL}/book/update/${payload.id}`,
         formData, // Menggunakan payload sebagai data permintaan
         config
       );

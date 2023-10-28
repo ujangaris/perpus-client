@@ -96,10 +96,7 @@ export const getSingleUserAction = createAsyncThunk(
           Authorization: `Bearer ${access_token}`,
         },
       };
-      const { data } = await axios.get(
-        `http://localhost:5000/perpus-api/v1/user/${userId}`,
-        config
-      );
+      const { data } = await axios.get(`${BASE_URL}/user/${userId}`, config);
       return data;
     } catch (error) {
       return rejectWithValue(error?.response?.data);
