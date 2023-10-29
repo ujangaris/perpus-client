@@ -29,7 +29,8 @@ export const getAllBooksAction = createAsyncThunk(
       const config = {
         // Menambahkan header Authorization dengan nilai Bearer access_token
         headers: {
-          Authorization: `Bearer ${access_token}`,
+          "Authorization": `Bearer ${access_token}`,
+          "ngrok-skip-browser-warning": "any_value",
         },
       };
       const { data } = await axios.get(`${BASE_URL}/private_books`, config);
@@ -65,7 +66,8 @@ export const addBooksAction = createAsyncThunk(
       const config = {
         // Menambahkan header Authorization dengan nilai Bearer access_token
         headers: {
-          Authorization: `Bearer ${access_token}`, // Set the content type to handle file uploads
+          "Authorization": `Bearer ${access_token}`, // Set the content type to handle file uploads
+          "ngrok-skip-browser-warning": "any_value",
         },
       };
       const { data } = await axios.post(
@@ -100,7 +102,8 @@ export const updateBooksAction = createAsyncThunk(
       const access_token = userAuth?.userInfo?.data?.access_token;
       const config = {
         headers: {
-          Authorization: `Bearer ${access_token}`,
+          "Authorization": `Bearer ${access_token}`,
+          "ngrok-skip-browser-warning": "any_value",
         },
       };
       const { data } = await axios.patch(

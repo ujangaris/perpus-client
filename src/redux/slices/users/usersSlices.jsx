@@ -32,6 +32,7 @@ export const loginAction = createAsyncThunk(
       const { data } = await axios.post(
         `${BASE_URL}/login`,
         // `http://localhost:5000/perpus-api/v1/login`,
+
         payload
       );
       //! save the user into localstorage
@@ -71,7 +72,8 @@ export const getAllUsersAction = createAsyncThunk(
       const config = {
         // Menambahkan header Authorization dengan nilai Bearer access_token
         headers: {
-          Authorization: `Bearer ${access_token}`,
+          "Authorization": `Bearer ${access_token}`,
+          "ngrok-skip-browser-warning": "any_value",
         },
       };
       const { data } = await axios.get(`${BASE_URL}/users`, config);
@@ -93,7 +95,8 @@ export const getSingleUserAction = createAsyncThunk(
       const access_token = userAuth?.userInfo?.data?.access_token;
       const config = {
         headers: {
-          Authorization: `Bearer ${access_token}`,
+          "Authorization": `Bearer ${access_token}`,
+          "ngrok-skip-browser-warning": "any_value",
         },
       };
       const { data } = await axios.get(`${BASE_URL}/user/${userId}`, config);

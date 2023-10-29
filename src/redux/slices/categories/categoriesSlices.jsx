@@ -36,6 +36,7 @@ export const getAllCategoriesAction = createAsyncThunk(
         // Menambahkan header Authorization dengan nilai Bearer access_token
         headers: {
           Authorization: `Bearer ${access_token}`,
+          "ngrok-skip-browser-warning": "any_value",
         },
       };
       const { data } = await axios.get(`${BASE_URL}/categories`, config);
@@ -61,6 +62,7 @@ export const addCategoryAction = createAsyncThunk(
         // Menambahkan header Authorization dengan nilai Bearer access_token
         headers: {
           Authorization: `Bearer ${access_token}`,
+          "ngrok-skip-browser-warning": "any_value",
         },
       };
       const { data } = await axios.post(
@@ -86,6 +88,7 @@ export const updateCategoryAction = createAsyncThunk(
       const config = {
         headers: {
           Authorization: `Bearer ${access_token}`,
+          "ngrok-skip-browser-warning": "any_value",
         },
       };
       const { data } = await axios.patch(

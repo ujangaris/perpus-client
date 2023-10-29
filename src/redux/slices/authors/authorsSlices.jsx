@@ -36,7 +36,8 @@ export const getAllAuthorsAction = createAsyncThunk(
       const config = {
         // Menambahkan header Authorization dengan nilai Bearer access_token
         headers: {
-          Authorization: `Bearer ${access_token}`,
+          "Authorization": `Bearer ${access_token}`,
+          "ngrok-skip-browser-warning": "any_value",
         },
       };
       const { data } = await axios.get(`${BASE_URL}/authors`, config);
@@ -61,7 +62,8 @@ export const addAuthorAction = createAsyncThunk(
       const config = {
         // Menambahkan header Authorization dengan nilai Bearer access_token
         headers: {
-          Authorization: `Bearer ${access_token}`,
+          "Authorization": `Bearer ${access_token}`,
+          "ngrok-skip-browser-warning": "any_value",
         },
       };
       const { data } = await axios.post(
@@ -89,7 +91,8 @@ export const updaateAuthorAction = createAsyncThunk(
       const config = {
         // Menambahkan header Authorization dengan nilai Bearer access_token
         headers: {
-          Authorization: `Bearer ${access_token}`,
+          "Authorization": `Bearer ${access_token}`,
+          "ngrok-skip-browser-warning": "any_value",
         },
       };
       const { data } = await axios.patch(

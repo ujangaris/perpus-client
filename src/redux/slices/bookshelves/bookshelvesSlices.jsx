@@ -29,7 +29,8 @@ export const getAllBookShelvesAction = createAsyncThunk(
       const config = {
         // Menambahkan header Authorization dengan nilai Bearer access_token
         headers: {
-          Authorization: `Bearer ${access_token}`,
+          "Authorization": `Bearer ${access_token}`,
+          "ngrok-skip-browser-warning": "any_value",
         },
       };
       const { data } = await axios.get(`${BASE_URL}/bookshelves`, config);
@@ -54,7 +55,8 @@ export const addBookshelfAction = createAsyncThunk(
       const config = {
         // Menambahkan header Authorization dengan nilai Bearer access_token
         headers: {
-          Authorization: `Bearer ${access_token}`,
+          "Authorization": `Bearer ${access_token}`,
+          "ngrok-skip-browser-warning": "any_value",
         },
       };
       const { data } = await axios.post(
@@ -79,7 +81,8 @@ export const updateBookshelfAction = createAsyncThunk(
       const access_token = userAuth?.userInfo?.data?.access_token;
       const config = {
         headers: {
-          Authorization: `Bearer ${access_token}`,
+          "Authorization": `Bearer ${access_token}`,
+          "ngrok-skip-browser-warning": "any_value",
         },
       };
       const { data } = await axios.patch(
