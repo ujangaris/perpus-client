@@ -43,24 +43,26 @@ export const Login = () => {
   );
   // !redirect
   // get the token user & admin
-  const isLoginAdmin = userAuth?.userInfo?.data?.role === "Super Admin";
+  // const isLoginAdmin = userAuth?.userInfo?.data?.role === "Super Admin";
 
-  const isLoginUser = userAuth?.userInfo?.data?.role === "User";
+  // const isLoginUser = userAuth?.userInfo?.data?.role === "User";
   // console.log(isLoginUser);
+  const token = userAuth?.userInfo?.data?.access_token;
   useEffect(() => {
-    if (isLoginAdmin) {
-      navigate("/admin-dashboard");
-    } else if (isLoginUser) {
-      navigate("/user-profile");
-    } else {
-      navigate("/login");
-    }
-    // if (userAuth?.userInfo?.data?.token?.access_token) {
+    // if (isLoginAdmin) {
+    //   navigate("/admin-dashboard");
+    // } else if (isLoginUser) {
     //   navigate("/user-profile");
+    // } else {
+    //   navigate("/login");
     // }
-  }, [isLoginAdmin, isLoginUser, navigate]);
+    if (token) {
+      navigate("/admin-dashboard");
+    }
+  }, [navigate, userAuth, token]);
+  console.log("token : " + token);
   return (
-    <body className="bg-gradient-primary">
+    <div className="bg-gradient-primary">
       <div className="container">
         {/* <!-- Outer Row --> */}
         <div className="row justify-content-center">
@@ -150,6 +152,6 @@ export const Login = () => {
           </div>
         </div>
       </div>
-    </body>
+    </div>
   );
 };
