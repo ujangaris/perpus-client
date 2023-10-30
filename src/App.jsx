@@ -20,6 +20,7 @@ import Authors from "./pages/Admin/Authors";
 import Books from "./pages/Admin/Books";
 import Bookshelves from "./pages/Admin/Bookshelves";
 import { Login } from "./pages/Login";
+import NotFound from "./pages/NotFound";
 
 function App() {
   // get the role user
@@ -35,6 +36,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />} />
+
         <Route path="/register" element={<Register />} />
         <Route
           path="/user-profile"
@@ -52,6 +54,7 @@ function App() {
           <SidebarAdmin />
           <div id="content-wrapper" className="d-flex flex-column">
             <Routes>
+              <Route path="/*" element={<NotFound />} />
               <Route path="/" element={<AdminDashBoard />} />
               <Route
                 path="/admin-profile"
