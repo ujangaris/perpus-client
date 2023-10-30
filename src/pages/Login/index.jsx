@@ -57,7 +57,7 @@ export const Login = () => {
     //   navigate("/login");
     // }
     if (token) {
-      navigate("/admin-dashboard");
+      navigate("/");
     }
   }, [navigate, userAuth, token]);
   console.log("token : " + token);

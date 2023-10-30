@@ -8,7 +8,8 @@ export const LogoutAdmin = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // handleLogout
-  const logoutHandler = () => {
+  const logoutHandler = (e) => {
+    e.preventDefault();
     dispatch(logoutAction());
     navigate("/login");
     // reload;
