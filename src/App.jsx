@@ -34,7 +34,6 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<AdminDashBoard />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route
@@ -53,7 +52,7 @@ function App() {
           <SidebarAdmin />
           <div id="content-wrapper" className="d-flex flex-column">
             <Routes>
-              <Route path="/admin-dashboard" element={<AdminDashBoard />} />
+              <Route path="/" element={<AdminDashBoard />} />
               <Route
                 path="/admin-profile"
                 element={
