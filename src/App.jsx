@@ -54,7 +54,7 @@ function App() {
           <SidebarAdmin />
           <div id="content-wrapper" className="d-flex flex-column">
             <Routes>
-              <Route path="/*" element={<NotFound />} />
+              <Route path="*" element={<NotFound />} />
               <Route path="/" element={<AdminDashBoard />} />
               <Route
                 path="/admin-profile"
