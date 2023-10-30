@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Button, Input, Gap } from "./../../components/atoms";
-import ImageLogin from "../../assets/images/imageLogin.png";
 import { useDispatch, useSelector } from "react-redux";
-import { loginAction } from "../../redux/slices/users/usersSlices";
-import { LoadingComponent } from "../../components/atoms/Alert/LoadingComponent";
-import { SuccessMessage } from "../../components/atoms/Alert/SuccessMessage";
 import { useNavigate } from "react-router-dom";
+import { loginAction } from "../../redux/slices/users/usersSlices";
+import { SuccessMessage } from "../../components/atoms/Alert/SuccessMessage";
 import { ErrorMessage } from "../../components/atoms/Alert/ErrorMessage";
-import "../../App.css";
+import { LoadingComponent } from "../../components/atoms/Alert/LoadingComponent";
+
 export const Login = () => {
   // ! Navigation
   const navigate = useNavigate();
@@ -62,61 +60,96 @@ export const Login = () => {
     // }
   }, [isLoginAdmin, isLoginUser, navigate]);
   return (
-    <section className="subscriptions">
+    <body className="bg-gradient-primary">
       <div className="container">
-        {/* bagi 2 halaman login kiri untuk gambar kanan untuk form */}
-        <div
-          className="row text-center justify-content-center align-items-center"
-          style={{ height: "450px" }}
-        >
-          <div className="col-md-6 order-md-2 mb-4 mb-md-0 ">
-            <div className="row">
-              <div className="col-md-8">
-                <h1 className="text-center mb-4">Please Login</h1>
-                {/* pasang handleLogin */}
-
-                {/* display success */}
-                {success && (
-                  <SuccessMessage message={userAuth.userInfo.message} />
-                )}
-                {/* display error */}
-                {error && <ErrorMessage message={error.message} />}
-                <form onSubmit={handleSubmit}>
-                  <Input
-                    type="text"
-                    placeholder="Enter Username"
-                    name="username"
-                    value={formData.username}
-                    onChange={handleChange}
-                  />
-                  <Gap height={18} />
-                  <Input
-                    type="password"
-                    placeholder="Enter Password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                  />
-                  <Gap height={18} />
-                  {loading ? (
-                    <LoadingComponent />
-                  ) : (
-                    <Button
-                      label="Login"
-                      type="submit"
-                      variant="second"
-                      fullWidth
-                    />
-                  )}
-                </form>
+        {/* <!-- Outer Row --> */}
+        <div className="row justify-content-center">
+          <div className="col-xl-10 col-lg-12 col-md-9">
+            <div className="card o-hidden border-0 shadow-lg my-5">
+              <div className="card-body p-0">
+                {/* <!-- Nested Row within Card Body --> */}
+                <div className="row">
+                  <div className="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                  <div className="col-lg-6">
+                    <div className="p-5">
+                      <div className="text-center">
+                        <h1 className="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                      </div>
+                      {/* display success */}
+                      {success && (
+                        <SuccessMessage message={userAuth.userInfo.message} />
+                      )}
+                      {/* display error */}
+                      {error && <ErrorMessage message={error.message} />}
+                      <form className="user" onSubmit={handleSubmit}>
+                        <div className="form-group">
+                          <input
+                            type="text"
+                            className="form-control form-control-user"
+                            id="username"
+                            aria-describedby="nameHelp"
+                            placeholder="Enter username"
+                            name="username"
+                            value={formData.username}
+                            onChange={handleChange}
+                          />
+                        </div>
+                        <div className="form-group">
+                          <input
+                            type="password"
+                            className="form-control form-control-user"
+                            id="exampleInputPassword"
+                            placeholder="Password"
+                            name="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                          />
+                        </div>
+                        {loading ? (
+                          <LoadingComponent />
+                        ) : (
+                          <button
+                            className="btn btn-primary btn-user btn-block"
+                            type="submit"
+                          >
+                            Login
+                          </button>
+                        )}
+                        <hr />
+                        <a
+                          href="index.html"
+                          className="btn btn-google btn-user btn-block"
+                        >
+                          <i className="fab fa-google fa-fw"></i> Login with
+                          Google
+                        </a>
+                        <a
+                          href="index.html"
+                          className="btn btn-facebook btn-user btn-block"
+                        >
+                          <i className="fab fa-facebook-f fa-fw"></i> Login with
+                          Facebook
+                        </a>
+                      </form>
+                      <hr />
+                      <div className="text-center">
+                        <a className="small" href="forgot-password.html">
+                          Forgot Password?
+                        </a>
+                      </div>
+                      <div className="text-center">
+                        <a className="small" href="register.html">
+                          Create an Account!
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <div className="col-md-6 mt-5 mb-5">
-            <img src={ImageLogin} alt="Login" className="img-fluid" />
-          </div>
         </div>
       </div>
-    </section>
+    </body>
   );
 };

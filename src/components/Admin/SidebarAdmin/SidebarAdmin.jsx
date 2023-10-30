@@ -27,12 +27,9 @@ export const SidebarAdmin = () => {
           onClick={changeStyle}
         >
           <div className="sidebar-brand-icon rotate-n-15">
-            <Link
-              to="/admin-dashboard"
-              style={{ textDecoration: "none", color: "white" }}
-            >
+            <a style={{ textDecoration: "none", color: "white" }}>
               <i className="fas fa-book"></i>
-            </Link>
+            </a>
           </div>
           <div className="sidebar-brand-text mx-3">
             Per <span>Pustakaan</span>
@@ -101,7 +98,7 @@ export const SidebarAdmin = () => {
           </Link>
         </li>
         <li className="nav-item">
-          <Link
+          <a
             className="nav-link collapsed"
             to="list-user"
             data-toggle="collapse"
@@ -111,7 +108,7 @@ export const SidebarAdmin = () => {
           >
             <i className="fas fa-fw fa-cog "></i>
             <span>Components</span>
-          </Link>
+          </a>
           <div
             id="collapseTwo"
             className="collapse"

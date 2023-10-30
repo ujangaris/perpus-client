@@ -3,8 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import "boxicons/css/boxicons.min.css";
 import { Register } from "./pages";
-import { Navbar } from "./components/Navbar";
-import { Login } from "./pages/Login/index";
+// import { Login } from "./pages/Login/index";
 import { Profile } from "./pages/User/Profile";
 import { ProtectedRoute } from "./components/AuthRoute/ProtectedRoute";
 import { useSelector } from "react-redux";
@@ -20,6 +19,7 @@ import Publishers from "./pages/Admin/Publishers";
 import Authors from "./pages/Admin/Authors";
 import Books from "./pages/Admin/Books";
 import Bookshelves from "./pages/Admin/Bookshelves";
+import { Login } from "./pages/Login";
 
 function App() {
   // get the role user
@@ -32,8 +32,6 @@ function App() {
   // console.log(isLoginUser);
   return (
     <BrowserRouter>
-      {(isLoginUser && <Navbar />) || (!isLoginAdmin && <Navbar />)}
-
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
