@@ -65,7 +65,12 @@ export const Login = () => {
               <div className="card-body p-0">
                 {/* <!-- Nested Row within Card Body --> */}
                 <div className="row">
-                  <div className="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                  <div className="col-lg-6 d-none d-lg-block bg-login-image">
+                    <img
+                      src="https://images.unsplash.com/photo-1529539795054-3c162aab037a?auto=format&fit=crop&q=60&w=468&h=538&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bG9naW58ZW58MHx8MHx8fDA%3D"
+                      alt=""
+                    />
+                  </div>
                   <div className="col-lg-6">
                     <div className="p-5">
                       <div className="text-center">
