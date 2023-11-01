@@ -29,11 +29,13 @@ export const EditAuthorModal = ({
             </h1>
             <button
               type="button"
-              className="btn-close"
-              data-bs-dismiss="modal"
+              className="close"
+              data-dismiss="modal"
               aria-label="Close"
               onClick={onClose}
-            ></button>
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
           <form>
             <div className="modal-body">
@@ -67,7 +69,7 @@ export const EditAuthorModal = ({
                 name="gender"
                 onChange={handleEditChange}
                 value={editAuthorData.gender}
-                className="form-select"
+                className="form-control"
               >
                 <option value="male">Male</option>
                 <option value="female">Female</option>

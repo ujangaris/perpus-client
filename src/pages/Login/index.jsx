@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { loginAction } from "../../redux/slices/users/usersSlices";
+
+import { LoadingComponent } from "../../components/atoms/Alert/LoadingComponent";
 import { SuccessMessage } from "../../components/atoms/Alert/SuccessMessage";
 import { ErrorMessage } from "../../components/atoms/Alert/ErrorMessage";
-import { LoadingComponent } from "../../components/atoms/Alert/LoadingComponent";
 
 export const Login = () => {
   // ! Navigation
@@ -47,20 +48,13 @@ export const Login = () => {
 
   // const isLoginUser = userAuth?.userInfo?.data?.role === "User";
   // console.log(isLoginUser);
-  const token = userAuth?.userInfo?.data?.access_token;
+  // const token = userAuth?.userInfo?.data?.role === "Super Admin";
   useEffect(() => {
-    // if (isLoginAdmin) {
-    //   navigate("/admin-dashboard");
-    // } else if (isLoginUser) {
-    //   navigate("/user-profile");
-    // } else {
-    //   navigate("/login");
-    // }
-    if (token) {
-      navigate("/");
+    if (userAuth?.userInfo?.data?.access_token) {
+      navigate("/dashboard-admin");
+      console.log("token : " + userAuth?.userInfo?.data?.access_token);
     }
-  }, [navigate, userAuth, token]);
-  console.log("token : " + token);
+  }, [navigate, userAuth?.userInfo?.data?.access_token]);
   return (
     <div className="bg-gradient-primary">
       <div className="container">
@@ -119,14 +113,14 @@ export const Login = () => {
                         )}
                         <hr />
                         <a
-                          href="index.html"
+                          href="#"
                           className="btn btn-google btn-user btn-block"
                         >
                           <i className="fab fa-google fa-fw"></i> Login with
                           Google
                         </a>
                         <a
-                          href="index.html"
+                          href="#"
                           className="btn btn-facebook btn-user btn-block"
                         >
                           <i className="fab fa-facebook-f fa-fw"></i> Login with
@@ -135,14 +129,18 @@ export const Login = () => {
                       </form>
                       <hr />
                       <div className="text-center">
-                        <a className="small" href="forgot-password.html">
+                        <a className="small" href="#">
                           Forgot Password?
                         </a>
                       </div>
                       <div className="text-center">
-                        <a className="small" href="register.html">
+                        <Link
+                          to="/register"
+                          lassName="small"
+                          href="register.html"
+                        >
                           Create an Account!
-                        </a>
+                        </Link>
                       </div>
                     </div>
                   </div>

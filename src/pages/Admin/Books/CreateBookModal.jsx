@@ -135,11 +135,13 @@ export const CreateBookModal = ({ isOpen, onClose }) => {
             </h1>
             <button
               type="button"
-              className="btn-close"
-              data-bs-dismiss="modal"
+              className="close"
+              data-dismiss="modal"
               aria-label="Close"
               onClick={onClose}
-            ></button>
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
           <form onSubmit={handleSubmit} method="post">
             <div className="modal-body">

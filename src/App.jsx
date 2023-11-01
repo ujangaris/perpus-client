@@ -21,41 +21,48 @@ import Books from "./pages/Admin/Books";
 import Bookshelves from "./pages/Admin/Bookshelves";
 import { Login } from "./pages/Login";
 import NotFound from "./pages/NotFound";
+import { Home } from "./pages/Admin/Home";
 
 function App() {
   // get the role user
-  // const { userAuth } = useSelector((state) => state?.users);
-  // const loggedInRole = userAuth?.userInfo?.data?.role;
-  // const isLogin = userAuth?.userInfo?.data?.token?.access_token;
+  const { userAuth } = useSelector((state) => state?.users);
+  // const loggedInRole = userAuth?.userInfo?.data?.access_token;
+  const isLogin = userAuth?.userInfo?.data?.access_token;
+  const notLogin =
+    userAuth?.userInfo === null || userAuth?.userInfo === undefined;
 
   // const isLoginAdmin = loggedInRole === "Super Admin";
   // const isLoginUser = loggedInRole === "User";
-  // console.log(userAuth?.userInfo?.data?.role);
-  // console.log(isLoginUser);
+  console.log(userAuth?.userInfo?.data?.access_token);
+  console.log("token apa:" + isLogin);
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-
-        <Route path="/register" element={<Register />} />
-        <Route
-          path="/user-profile"
-          element={
-            <ProtectedRoute>
-              <Profile />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
-
-      {/* {isLoginAdmin && ( */}
       <div id="page-top">
         <div id="wrapper">
-          <SidebarAdmin />
+          {isLogin && <SidebarAdmin />}
           <div id="content-wrapper" className="d-flex flex-column">
             <Routes>
-              <Route path="*" element={<NotFound />} />
-              <Route path="/" element={<AdminDashBoard />} />
+              {/* <Route path="*" element={<NotFound />} /> */}
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+
+              <Route path="/register" element={<Register />} />
+              <Route
+                path="/user-profile"
+                element={
+                  <ProtectedRoute>
+                    <Profile />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/dashboard-admin"
+                element={
+                  <ProtectedRoute>
+                    <AdminDashBoard />
+                  </ProtectedRoute>
+                }
+              />
               <Route
                 path="/admin-profile"
                 element={
@@ -121,15 +128,14 @@ function App() {
                 }
               />
             </Routes>
-            <FooterAdmin />
+            {isLogin && <FooterAdmin />}
           </div>
           <a className="scroll-to-top rounded" href="#page-top">
             <i className="fas fa-angle-up"></i>
           </a>
-          <LogoutAdmin />
+          {isLogin && <LogoutAdmin />}
         </div>
       </div>
-      {/* )} */}
     </BrowserRouter>
   );
 }

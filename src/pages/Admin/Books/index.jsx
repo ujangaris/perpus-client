@@ -63,6 +63,14 @@ const Books = () => {
   const handleEditModalClose = () => {
     setIsEditModalOpen(false);
   };
+
+  // handleEditChange
+  const handleEditChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
   // pasang handleEditKlik
   const handleEditClick = (
     id,
@@ -329,7 +337,7 @@ const Books = () => {
           isOpen={isEditModalOpen}
           onClose={handleEditModalClose}
           formData={formData}
-          // handleEditChange={handleEditChange}
+          handleEditChange={handleEditChange}
           setFormData={setFormData}
         />
       </section>

@@ -11,7 +11,7 @@ export const EditBookModal = ({
   onClose,
   formData,
   setFormData,
-  // handleEditChange,
+  handleEditChange,
 }) => {
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.books);
@@ -19,13 +19,7 @@ export const EditBookModal = ({
   const { authors } = useSelector((state) => state.authors);
   const { publishers } = useSelector((state) => state.publishers);
   const { bookshelves } = useSelector((state) => state.bookshelves);
-  // handleEditChange
-  const handleEditChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+
   // ! handle picture change
   const handleFileChange = (e) => {
     const selectedImage = e.target.files[0];
@@ -52,13 +46,19 @@ export const EditBookModal = ({
       style={{
         display: isOpen ? "block" : "none",
         marginTop: "20px",
+        overflowY: "auto",
       }}
       id="exampleModal"
       tabIndex="-1"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
-      <div className="modal-dialog modal-lg ">
+      <div
+        className="modal-dialog modal-lg modal-md modal-sm"
+        style={{
+          width: "100%", // Lebar default
+        }}
+      >
         <div className="modal-content" style={{ width: "90%" }}>
           <div className="modal-header bg-primary bg-opacity-75">
             <h1 className="modal-title fs-5 text-white" id="exampleModalLabel">
@@ -66,11 +66,13 @@ export const EditBookModal = ({
             </h1>
             <button
               type="button"
-              className="btn-close"
-              data-bs-dismiss="modal"
+              className="close"
+              data-dismiss="modal"
               aria-label="Close"
               onClick={onClose}
-            ></button>
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
           <form method="post" onSubmit={handleUpdateBook}>
             <div className="modal-body">
@@ -146,7 +148,7 @@ export const EditBookModal = ({
                       id={formData?.id_category}
                       value={formData?.category}
                       onChange={handleEditChange}
-                      className="form-select"
+                      className="form-control"
                     >
                       <option>-- select category --</option>
                       {categories?.data?.map((category) => (
@@ -166,7 +168,7 @@ export const EditBookModal = ({
                       name="author"
                       value={formData?.author}
                       onChange={handleEditChange}
-                      className="form-select"
+                      className="form-control"
                     >
                       <option>--- select author ---</option>
                       {authors?.data?.map((author) => (
@@ -186,7 +188,7 @@ export const EditBookModal = ({
                       name="publisher"
                       value={formData.publisher}
                       onChange={handleEditChange}
-                      className="form-select"
+                      className="form-control"
                     >
                       <option>--- select publisher ---</option>
                       {publishers?.data?.map((publisher) => (
@@ -205,7 +207,7 @@ export const EditBookModal = ({
                       name="bookshelf"
                       value={formData.bookshelf}
                       onChange={handleEditChange}
-                      className="form-select"
+                      className="form-control"
                     >
                       <option>--- select bookshelf ---</option>
                       {bookshelves?.data?.map((bookshelf) => (

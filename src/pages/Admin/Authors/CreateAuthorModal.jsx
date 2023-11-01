@@ -42,17 +42,19 @@ export const CreateAuthorModal = ({ isOpen, onClose }) => {
     >
       <div className="modal-dialog">
         <div className="modal-content">
-          <div className="modal-header">
-            <h1 className="modal-title fs-5" id="exampleModalLabel">
+          <div className="modal-header bg-success bg-opacity-75">
+            <h1 className="modal-title text-white" id="exampleModalLabel">
               Add Author
             </h1>
             <button
               type="button"
-              className="btn-close"
-              data-bs-dismiss="modal"
+              className="close"
+              data-dismiss="modal"
               aria-label="Close"
               onClick={onClose}
-            ></button>
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
           <form onSubmit={handleSubmit} method="post">
             <div className="modal-body">
@@ -86,7 +88,7 @@ export const CreateAuthorModal = ({ isOpen, onClose }) => {
                 name="gender"
                 onChange={handleChange}
                 value={formData.gender}
-                className="form-select"
+                className="form-control"
               >
                 <option value="">-- Select --</option>
                 <option value="male">Male</option>
@@ -105,7 +107,7 @@ export const CreateAuthorModal = ({ isOpen, onClose }) => {
               {loading ? (
                 <LoadingComponent />
               ) : (
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="btn btn-success">
                   Add Author
                 </button>
               )}

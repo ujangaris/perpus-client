@@ -48,7 +48,7 @@ export const SidebarAdmin = () => {
 
         {/*  <!-- Nav Item - Dashboard --> */}
         <li className="nav-item active">
-          <Link className="nav-link" to="/">
+          <Link className="nav-link" to="/dashboard-admin">
             <i className="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span>
           </Link>
