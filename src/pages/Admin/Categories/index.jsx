@@ -43,7 +43,7 @@ const Categories = () => {
 
   // pagination state
   const [currentPage, setCurrentPage] = useState(1);
-  const [categoriesPerPage] = useState(2); // Jumlah artikel per halaman
+  const [categoriesPerPage, setCategoriesPerPage] = useState(2); // Jumlah artikel per halaman
   const [searchTerm, setSearchTerm] = useState(""); // Kata kunci pencarian
 
   // Mencari artikel berdasarkan judul (title)
@@ -197,11 +197,17 @@ const Categories = () => {
                               aria-controls="dataTable"
                               className="custom-select custom-select-sm ml-2"
                               style={{ width: "70px" }}
+                              value={categoriesPerPage}
+                              onChange={(e) => {
+                                setCategoriesPerPage(Number(e.target.value));
+                                setCurrentPage(1); // Kembali ke halaman pertama saat mengubah jumlah entri
+                              }}
                             >
-                              <option value="10">10</option>
-                              <option value="25">25</option>
-                              <option value="50">50</option>
-                              <option value="100">100</option>
+                              <option value="1">1</option>
+                              <option value="2">2</option>
+                              <option value="3">3</option>
+                              <option value="4">4</option>
+                              <option value="5">5</option>
                             </select>
                             entries
                           </label>
@@ -298,11 +304,17 @@ const Categories = () => {
                               aria-controls="dataTable"
                               className="custom-select custom-select-sm ml-2"
                               style={{ width: "70px" }}
+                              value={categoriesPerPage}
+                              onChange={(e) => {
+                                setCategoriesPerPage(Number(e.target.value));
+                                setCurrentPage(1); // Kembali ke halaman pertama saat mengubah jumlah entri
+                              }}
                             >
-                              <option value="10">10</option>
-                              <option value="25">25</option>
-                              <option value="50">50</option>
-                              <option value="100">100</option>
+                              <option value="1">1</option>
+                              <option value="2">2</option>
+                              <option value="3">3</option>
+                              <option value="4">4</option>
+                              <option value="5">5</option>
                             </select>
                             entries
                           </label>
