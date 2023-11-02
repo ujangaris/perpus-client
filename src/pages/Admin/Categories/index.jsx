@@ -12,6 +12,7 @@ import Swal from "sweetalert2";
 import { resetCreateAction } from "../../../redux/slices/globalSlice/globalSlice";
 import showSessionExpiredAlert from "../../../components/atoms/Alert/SessionExpiredAlert";
 import { EditCategoryModal } from "./EditCategoryModal";
+import { Pagination } from "../../../components/Admin/Pagination/Pagination";
 const Categories = () => {
   // siapkan dispatch
   const dispatch = useDispatch();
@@ -40,6 +41,31 @@ const Categories = () => {
   const [newCategory, setNewCategory] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false); // Track modal state
 
+  // pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const [categoriesPerPage] = useState(2); // Jumlah artikel per halaman
+  const [searchTerm, setSearchTerm] = useState(""); // Kata kunci pencarian
+
+  // Mengatur halaman saat ini
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  // Menghitung total halaman
+  const totalPages = Math.ceil(categories?.data?.length / categoriesPerPage);
+  // Menghitung indeks artikel yang akan ditampilkan di halaman saat ini
+  const indexOfLastCategory = currentPage * categoriesPerPage;
+  const indexOfFirstCategory = indexOfLastCategory - categoriesPerPage + 1;
+  const currentCategories = categories?.data?.slice(
+    indexOfFirstCategory - 1,
+    indexOfLastCategory
+  );
+
+  // Menghasilkan tombol halaman
+  const pageNumbers = [];
+  for (let i = 1; i <= totalPages; i++) {
+    pageNumbers.push(i);
+  }
   // State untuk modal edit
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   // state edit category
@@ -126,7 +152,6 @@ const Categories = () => {
     }
   }, [category, dispatch]);
 
-  // console.log("isinya :" + category?.status);
   return (
     <>
       <div id="content">
@@ -214,6 +239,7 @@ const Categories = () => {
                       >
                         <thead className="table-primary text-center">
                           <tr>
+                            <th>No.</th>
                             <th>Name Categories</th>
                             <th>Action</th>
                           </tr>
@@ -231,8 +257,9 @@ const Categories = () => {
                               </td>
                             </tr>
                           )}
-                          {categories?.data?.map((item) => (
+                          {currentCategories?.map((item, index) => (
                             <tr key={item.id_category}>
+                              <td>{indexOfFirstCategory + index}</td>
                               <td>{item.category}</td>
                               <td>
                                 <span
@@ -275,36 +302,50 @@ const Categories = () => {
                           </label>
                         </div>
                       </div>
-                      <div className="col-md-6 d-flex justify-content-end">
-                        <nav aria-label="...">
-                          <ul className="pagination">
-                            <li className="page-item disabled">
-                              <span className="page-link">Previous</span>
-                            </li>
-                            <li
-                              className="page-item active"
-                              aria-current="page"
+                      {/* pasang pagination */}
+                      <nav aria-label="Page navigation example">
+                        <ul className="pagination justify-content-end">
+                          <li
+                            className={`page-item ${
+                              currentPage === 1 ? "disabled" : ""
+                            }`}
+                          >
+                            <button
+                              className="page-link"
+                              onClick={() => paginate(currentPage - 1)}
                             >
-                              <span className="page-link">1</span>
+                              Previous
+                            </button>
+                          </li>
+                          {pageNumbers.map((number) => (
+                            <li
+                              key={number}
+                              className={`page-item ${
+                                currentPage === number ? "active" : ""
+                              }`}
+                            >
+                              <button
+                                className="page-link"
+                                onClick={() => paginate(number)}
+                              >
+                                {number}
+                              </button>
                             </li>
-                            <li className="page-item">
-                              <a className="page-link" href="#!">
-                                2
-                              </a>
-                            </li>
-                            <li className="page-item">
-                              <a className="page-link" href="#!">
-                                3
-                              </a>
-                            </li>
-                            <li className="page-item">
-                              <a className="page-link" href="#!">
-                                Next
-                              </a>
-                            </li>
-                          </ul>
-                        </nav>
-                      </div>
+                          ))}
+                          <li
+                            className={`page-item ${
+                              currentPage === totalPages ? "disabled" : ""
+                            }`}
+                          >
+                            <button
+                              className="page-link"
+                              onClick={() => paginate(currentPage + 1)}
+                            >
+                              Next
+                            </button>
+                          </li>
+                        </ul>
+                      </nav>
                     </div>
                   </div>
                 </div>
