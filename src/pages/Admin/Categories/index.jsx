@@ -46,17 +46,21 @@ const Categories = () => {
   const [categoriesPerPage] = useState(2); // Jumlah artikel per halaman
   const [searchTerm, setSearchTerm] = useState(""); // Kata kunci pencarian
 
+  // Mencari artikel berdasarkan judul (title)
+  const filteredCategories = categories?.data?.filter((item) =>
+    item?.category?.toLowerCase().includes(searchTerm?.toLowerCase())
+  );
   // Mengatur halaman saat ini
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-
+  console.log(filteredCategories);
   // Menghitung total halaman
-  const totalPages = Math.ceil(categories?.data?.length / categoriesPerPage);
+  const totalPages = Math.ceil(filteredCategories?.length / categoriesPerPage);
   // Menghitung indeks artikel yang akan ditampilkan di halaman saat ini
   const indexOfLastCategory = currentPage * categoriesPerPage;
   const indexOfFirstCategory = indexOfLastCategory - categoriesPerPage + 1;
-  const currentCategories = categories?.data?.slice(
+  const currentCategories = filteredCategories?.slice(
     indexOfFirstCategory - 1,
     indexOfLastCategory
   );
@@ -217,10 +221,12 @@ const Categories = () => {
                           style={{ width: "200px" }}
                         >
                           <input
-                            type="text"
+                            type="search"
                             name="table_search"
                             className="form-control"
                             placeholder="Search..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
                           />
                         </div>
                       </div>
