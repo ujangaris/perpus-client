@@ -64,7 +64,7 @@ function App() {
                 }
               />
               <Route
-                path="/admin-profile"
+                path="/profile"
                 element={
                   <ProtectedRoute>
                     <AdminProfile />

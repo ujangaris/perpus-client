@@ -106,6 +106,26 @@ export const getSingleUserAction = createAsyncThunk(
     }
   }
 );
+//!  User Profile Action
+export const userProfileAction = createAsyncThunk(
+  "users/user-profile",
+  async (userId, { rejectWithValue, getState, dispatch }) => {
+    try {
+      const { userAuth } = getState().users;
+      const access_token = userAuth?.userInfo?.data?.access_token;
+      const config = {
+        headers: {
+          "Authorization": `Bearer ${access_token}`,
+          "ngrok-skip-browser-warning": "any_value",
+        },
+      };
+      const { data } = await axios.get(`${BASE_URL}/profile`, config);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error?.response?.data);
+    }
+  }
+);
 
 // ! Logout action
 export const logoutAction = createAsyncThunk("users/logout", async () => {
@@ -164,7 +184,7 @@ const usersSlice = createSlice({
       state.error = null;
     });
     // * Handle the rejection
-    builder.addCase(getSingleUserAction.rejected, (state, action) => {
+    builder.addCase(getAllUsersAction.rejected, (state, action) => {
       state.error = action.payload;
       state.loading = false;
     });
@@ -181,7 +201,23 @@ const usersSlice = createSlice({
       state.error = null;
     });
     // * Handle the rejection
-    builder.addCase(getAllUsersAction.rejected, (state, action) => {
+    builder.addCase(getSingleUserAction.rejected, (state, action) => {
+      state.error = action.payload;
+      state.loading = false;
+    });
+    //! user profile
+    builder.addCase(userProfileAction.pending, (state, action) => {
+      state.loading = true;
+    });
+    // handle fullfilled state
+    builder.addCase(userProfileAction.fulfilled, (state, action) => {
+      state.user = action.payload;
+      state.success = true;
+      state.loading = false;
+      state.error = null;
+    });
+    // * Handle the rejection
+    builder.addCase(userProfileAction.rejected, (state, action) => {
       state.error = action.payload;
       state.loading = false;
     });

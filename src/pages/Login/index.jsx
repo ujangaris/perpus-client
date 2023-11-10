@@ -44,17 +44,24 @@ export const Login = () => {
   );
   // !redirect
   // get the token user & admin
-  // const isLoginAdmin = userAuth?.userInfo?.data?.role === "Super Admin";
+  const isLoginAdmin = userAuth?.userInfo?.data?.role === "Super Admin";
 
-  // const isLoginUser = userAuth?.userInfo?.data?.role === "User";
-  // console.log(isLoginUser);
+  const isLoginUser = userAuth?.userInfo?.data?.role === "User";
+  console.log(isLoginUser);
   // const token = userAuth?.userInfo?.data?.role === "Super Admin";
   useEffect(() => {
-    if (userAuth?.userInfo?.data?.access_token) {
+    // if (userAuth?.userInfo?.data?.access_token) {
+    //   navigate("/dashboard-admin");
+    //   console.log("token : " + userAuth?.userInfo?.data?.access_token);
+    // }
+    if (isLoginAdmin) {
       navigate("/dashboard-admin");
-      console.log("token : " + userAuth?.userInfo?.data?.access_token);
+    } else if (isLoginUser) {
+      navigate("/profile");
     }
-  }, [navigate, userAuth?.userInfo?.data?.access_token]);
+  }, [navigate, userAuth?.userInfo?.data?.access_token, isLoginAdmin, isLoginUser]);
+  // console.log("ini dari login: " + isLoginAdmin);
+  // console.log("ini dari login: " + isLoginUser);
   return (
     <div className="bg-gradient-primary">
       <div className="container">
