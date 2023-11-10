@@ -59,7 +59,12 @@ export const Login = () => {
     } else if (isLoginUser) {
       navigate("/profile");
     }
-  }, [navigate, userAuth?.userInfo?.data?.access_token, isLoginAdmin, isLoginUser]);
+  }, [
+    navigate,
+    userAuth?.userInfo?.data?.access_token,
+    isLoginAdmin,
+    isLoginUser,
+  ]);
   // console.log("ini dari login: " + isLoginAdmin);
   // console.log("ini dari login: " + isLoginUser);
   return (
@@ -72,7 +77,7 @@ export const Login = () => {
               <div className="card-body p-0">
                 {/* <!-- Nested Row within Card Body --> */}
                 <div className="row">
-                  <div className="col-lg-6 d-none d-lg-block bg-login-image">
+                  <div className="col-lg-6 d-none d-lg-block ">
                     <img
                       src="https://images.unsplash.com/photo-1529539795054-3c162aab037a?auto=format&fit=crop&q=60&w=468&h=538&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bG9naW58ZW58MHx8MHx8fDA%3D"
                       alt=""
@@ -141,7 +146,7 @@ export const Login = () => {
                       </form>
                       <hr />
                       <div className="text-center">
-                        <a className="small" href="#">
+                        <a className="small" href="/forgot-password">
                           Forgot Password?
                         </a>
                       </div>

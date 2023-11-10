@@ -126,7 +126,21 @@ export const userProfileAction = createAsyncThunk(
     }
   }
 );
-
+//! Forgot Password Action
+export const forgotPasswordAction = createAsyncThunk(
+  "users/forgot-password",
+  async (email, { rejectWithValue, getState, dispatch }) => {
+    try {
+      const { data } = await axios.post(
+        `${BASE_URL}/user/reset_password`,
+        email
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue(error?.response?.data);
+    }
+  }
+);
 // ! Logout action
 export const logoutAction = createAsyncThunk("users/logout", async () => {
   // remove the token from localstorage
@@ -218,6 +232,21 @@ const usersSlice = createSlice({
     });
     // * Handle the rejection
     builder.addCase(userProfileAction.rejected, (state, action) => {
+      state.error = action.payload;
+      state.loading = false;
+    });
+
+    // !Forgot Password
+    builder.addCase(forgotPasswordAction.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(forgotPasswordAction.fulfilled, (state, action) => {
+      state.user = action.payload;
+      state.success = true;
+      state.loading = false;
+      state.error = null;
+    });
+    builder.addCase(forgotPasswordAction.rejected, (state, action) => {
       state.error = action.payload;
       state.loading = false;
     });

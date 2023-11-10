@@ -22,6 +22,7 @@ import Bookshelves from "./pages/Admin/Bookshelves";
 import { Login } from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import { Home } from "./pages/Admin/Home";
+import { ForgotPassword } from "./pages/ForgotPassword/ForgotPassword";
 
 function App() {
   // get the role user
@@ -37,16 +38,21 @@ function App() {
   console.log("token apa:" + isLogin);
   return (
     <BrowserRouter>
+      {notLogin && (
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+        </Routes>
+      )}
       <div id="page-top">
         <div id="wrapper">
           {isLogin && <SidebarAdmin />}
           <div id="content-wrapper" className="d-flex flex-column">
             <Routes>
               {/* <Route path="*" element={<NotFound />} /> */}
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
 
-              <Route path="/register" element={<Register />} />
               <Route
                 path="/user-profile"
                 element={
