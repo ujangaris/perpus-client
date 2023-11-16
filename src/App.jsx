@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 
 import "boxicons/css/boxicons.min.css";
 import { Register } from "./pages";
@@ -45,92 +45,97 @@ function App() {
           <div id="content-wrapper" className="d-flex flex-column">
             <Routes>
               {/* <Route path="*" element={<NotFound />} /> */}
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/forgot-password" element={<ForgotPassword />} />
-              <Route path="/reset-password" element={<ResetPassword />} />
+              <Route path="/" element={<Outlet />}>
+                <Route index element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/forgot-password" element={<ForgotPassword />} />
+                <Route
+                  path="/reset-password/:token"
+                  element={<ResetPassword />}
+                />
 
-              <Route
-                path="/user-profile"
-                element={
-                  <ProtectedRoute>
-                    <Profile />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/dashboard-admin"
-                element={
-                  <ProtectedRoute>
-                    <AdminDashBoard />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/profile"
-                element={
-                  <ProtectedRoute>
-                    <AdminProfile />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/list-authors"
-                element={
-                  <ProtectedRoute>
-                    <Authors />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/list-publishers"
-                element={
-                  <ProtectedRoute>
-                    <Publishers />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/list-categories"
-                element={
-                  <ProtectedRoute>
-                    <Categories />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/list-users"
-                element={
-                  <ProtectedRoute>
-                    <Users />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/list-books"
-                element={
-                  <ProtectedRoute>
-                    <Books />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/list-bookshelves"
-                element={
-                  <ProtectedRoute>
-                    <Bookshelves />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/user/:userId"
-                element={
-                  <ProtectedRoute>
-                    <DetailUser />
-                  </ProtectedRoute>
-                }
-              />
+                <Route
+                  path="/user-profile"
+                  element={
+                    <ProtectedRoute>
+                      <Profile />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/dashboard-admin"
+                  element={
+                    <ProtectedRoute>
+                      <AdminDashBoard />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/profile"
+                  element={
+                    <ProtectedRoute>
+                      <AdminProfile />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/list-authors"
+                  element={
+                    <ProtectedRoute>
+                      <Authors />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/list-publishers"
+                  element={
+                    <ProtectedRoute>
+                      <Publishers />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/list-categories"
+                  element={
+                    <ProtectedRoute>
+                      <Categories />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/list-users"
+                  element={
+                    <ProtectedRoute>
+                      <Users />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/list-books"
+                  element={
+                    <ProtectedRoute>
+                      <Books />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/list-bookshelves"
+                  element={
+                    <ProtectedRoute>
+                      <Bookshelves />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/user/:userId"
+                  element={
+                    <ProtectedRoute>
+                      <DetailUser />
+                    </ProtectedRoute>
+                  }
+                />
+              </Route>
             </Routes>
             {isLogin && <FooterAdmin />}
           </div>

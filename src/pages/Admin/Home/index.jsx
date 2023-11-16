@@ -18,8 +18,10 @@ export const Home = () => {
           </div>
           <div className="col-lg-6">
             <h1 className="display-5 fw-bold text-body-emphasis lh-1 mb-3 text-center shadow">
-              <strong className="fw-bold">Per</strong>
-              <span className="fw-bold text-primary ">Pustakaan</span>
+              <marquee>
+                <strong className="fw-bold">Per</strong>
+                <span className="fw-bold text-primary ">Pustakaan</span>
+              </marquee>
             </h1>
             <p className="lead">
               Temukan beragam buku berkualitas dan akses cepat di perpustakaan

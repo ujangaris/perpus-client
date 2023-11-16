@@ -14,6 +14,8 @@ const INITIAL_STATE = {
   users: [],
   user: null,
   success: false,
+  emailMessage: undefined,
+  isEmailSent: false,
   profile: {},
   userAuth: {
     error: null,
@@ -141,6 +143,28 @@ export const forgotPasswordAction = createAsyncThunk(
     }
   }
 );
+
+//! Reset Password Action
+export const resetPasswordAction = createAsyncThunk(
+  "users/reset-password",
+  async ({ resetToken, password }, { rejectWithValue, getState, dispatch }) => {
+    try {
+      // const config = {
+      //   headers: {
+      //     " Content-Type": `"application/json",
+      //   },
+      const { data } = await axios.patch(
+        `${BASE_URL}/user/change_password/${resetToken}`,
+        { password }
+      );
+      //! save the user into localstorage
+      localStorage.setItem("userInfo", JSON.stringify(data));
+      return data;
+    } catch (error) {
+      return rejectWithValue(error?.response?.data);
+    }
+  }
+);
 // ! Logout action
 export const logoutAction = createAsyncThunk("users/logout", async () => {
   // remove the token from localstorage
@@ -241,12 +265,28 @@ const usersSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(forgotPasswordAction.fulfilled, (state, action) => {
-      state.user = action.payload;
+      // state.user = action.payload;
+      state.isEmailSent = true;
+      state.emailMessage = action.payload;
       state.success = true;
       state.loading = false;
       state.error = null;
     });
     builder.addCase(forgotPasswordAction.rejected, (state, action) => {
+      state.error = action.payload;
+      state.loading = false;
+    });
+    // !Reset Password
+    builder.addCase(resetPasswordAction.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(resetPasswordAction.fulfilled, (state, action) => {
+      state.user = action.payload;
+      state.success = true;
+      state.loading = false;
+      state.error = null;
+    });
+    builder.addCase(resetPasswordAction.rejected, (state, action) => {
       state.error = action.payload;
       state.loading = false;
     });

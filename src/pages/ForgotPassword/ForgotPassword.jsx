@@ -8,13 +8,15 @@ import { SuccessMessage } from "../../components/atoms/Alert/SuccessMessage";
 export const ForgotPassword = () => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
-  const { loading, success, user } = useSelector((state) => state.users);
+  const { loading, success, user, error, isEmailSent, emailMessage } =
+    useSelector((state) => state.users);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(forgotPasswordAction({ email }));
   };
   console.log("isi dari user :" + user?.message);
+  console.log("isi dari emailMessage :" + user?.emailMessage?.message);
   return (
     <body className="bg-gradient-primary">
       <div className="container">
@@ -37,12 +39,19 @@ export const ForgotPassword = () => {
                         <h1 className="h4 text-gray-900 mb-2">
                           Forgot Your Password?
                         </h1>
-                        {success && <SuccessMessage message={user?.message} />}
+                        {success && (
+                          <SuccessMessage message={emailMessage?.message} />
+                        )}
                         <p className="mb-4">
                           We get it, stuff happens. Just enter your email
                           address below and we'll send you a link to reset your
                           password!
                         </p>
+                        {error && (
+                          <p className="text-danger">
+                            {error?.message?.email[0]}
+                          </p>
+                        )}
                       </div>
                       <form className="user" onSubmit={handleSubmit}>
                         <div className="form-group">
